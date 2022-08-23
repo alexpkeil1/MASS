@@ -149,11 +149,11 @@ glm.nb <- function(formula, data, weights,
                           epsilon = control$epsilon,
                           trace = control$trace > 1),
                           intercept = attr(Terms, "intercept") > 0)
+        mu <- fit$fitted.values
         t0 <- th
         th <- theta.ml(Y, mu, sum(w), w, limit=control$maxit,
                        trace = control$trace > 2)
         fam <- do.call("negative.binomial", list(theta = th, link = link))
-        mu <- fit$fitted.values
         del <- t0 - th
         Lm0 <- Lm
         Lm <- loglik(n, th, mu, Y, w)
